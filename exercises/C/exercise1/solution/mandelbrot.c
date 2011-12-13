@@ -32,6 +32,26 @@ static inline int point_in_mandelbrot_set(const float x0,
     return max_iter;
 }
 
+/* Initialise data for image array.  Data is stored in "scanline
+ * order", i.e. x dimension varies fastest.  You get an array with
+ * shape image[grid_size_y][grid_size_x] from this function. */
+void initialise_image(int ***image, const int grid_size_x, const int grid_size_y)
+{
+    int i;
+    int j;
+    *image = (int**)arralloc(sizeof(int), 2, grid_size_y, grid_size_x);
+
+    if ( NULL == *image ) {
+        error(1, errno, "Unable to allocate memory for image\n");
+    }
+    /* initalise results array to black */
+    for ( i = 0; i < grid_size_y; i++ ) {
+        for ( j = 0; j < grid_size_x; j++ ) {
+            (*image)[i][j] = -1;
+        }
+    }
+}
+
 void compute_mandelbrot_set(int **image,
                             const float xmin,
                             const float xmax,
@@ -54,26 +74,6 @@ void compute_mandelbrot_set(int **image,
         }
     }
 
-}
-
-/* Initialise data for image array.  Data is stored in "scanline
- * order", i.e. x dimension varies fastest.  You get an array with
- * shape image[grid_size_y][grid_size_x] from this function. */
-void initialise_image(int ***image, const int grid_size_x, const int grid_size_y)
-{
-    int i;
-    int j;
-    *image = (int**)arralloc(sizeof(int), 2, grid_size_y, grid_size_x);
-
-    if ( NULL == *image ) {
-        error(1, errno, "Unable to allocate memory for image\n");
-    }
-    /* initalise results array to black */
-    for ( i = 0; i < grid_size_y; i++ ) {
-        for ( j = 0; j < grid_size_x; j++ ) {
-            (*image)[i][j] = -1;
-        }
-    }
 }
 
 int main(int argc, char** argv)
