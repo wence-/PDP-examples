@@ -4,7 +4,8 @@
 #include "read_options.h"
   
 void read_options(int argc, char**argv, 
-                  int* gridSize,
+                  int* gridSizeX,
+                  int* gridSizeY,
                   int* iter,
                   float* xMin,
                   float* xMax,
@@ -17,16 +18,21 @@ void read_options(int argc, char**argv,
     float ftmp;
   
     /* loop over command line arguments */
-    while ( (count = getopt(argc, argv, "S:i:x:X:y:Y:mjh")) != -1 ) {
+    while ( (count = getopt(argc, argv, "s:S:i:x:X:y:Y:mjh")) != -1 ) {
         switch (count) {
       
         case 'S':
-            /* option -S: grid size in one dimension */
+            /* option -S: grid size in X dimension */
             tmp = atoi(optarg);
-            if ( tmp >= 4 ) *gridSize = tmp;
+            if ( tmp >= 4 ) *gridSizeX = tmp;
             else fprintf(stderr, "Using default grid size.\n");
             break;
-      
+        case 's':
+            /* option -S: grid size in Y dimension */
+            tmp = atoi(optarg);
+            if ( tmp >= 4 ) *gridSizeY = tmp;
+            else fprintf(stderr, "Using default grid size.\n");
+            break;
         case 'i':
             /* option -i: number of iterations for the calculation */
             tmp = atoi(optarg);
@@ -66,7 +72,8 @@ void read_options(int argc, char**argv,
         case 'h':
             printf("Usage:\n");
             printf("mandelbrot [-SixXyYh]\n");
-            printf("   -S NPIXEL    Set size of image\n");
+            printf("   -S NPIXEL    Set number of pixels in X dimension of image\n");
+            printf("   -s NPIXEL    Set number of pixels in Y dimension of image\n");
             printf("   -i ITS       Set max number of iterations for a point to be inside\n");
             printf("   -x XMIN      Set xmin coordinate\n");
             printf("   -X XMAX      Set xmax coordinate\n");

@@ -68,12 +68,12 @@ static inline void gray_to_rgb(int gray, int rgb[3])
 }
 
 /*
- * Write a PPM file containing the NI x NJ pixels of IMAGE to FILE.
+ * Write a PPM file containing the xsize x ysize pixels of IMAGE to FILE.
  *
  * IMAGE is considered as a set of grayscale values that are converted
  * to RGB by mapping them onto HSV.
  */
-void write_ppm(const char *file, int **image, int ni, int nj)
+void write_ppm(const char *file, int **image, int xsize, int ysize)
 {
     int i;
     int j;
@@ -94,13 +94,15 @@ void write_ppm(const char *file, int **image, int ni, int nj)
      * R G B
      * R G B
      * ...
+     *
+     * All RGB values must be <= MAX_COLOURS
      */
-    fprintf(fp, "P3\n%d %d\n%d\n", ni, nj, MAX_COLOUR_VALS);
+    fprintf(fp, "P3\n%d %d\n%d\n", xsize, ysize, MAX_COLOUR_VALS);
 
-    for ( i = 0; i < ni; i++ ) {
-        for ( j = 0; j < nj; j++ ) {
+    for ( i = 0; i < ysize; i++ ) {
+        for ( j = 0; j < xsize; j++ ) {
             gray_to_rgb(image[i][j], rgb);
-            fprintf (fp,"%d %d %d\n", rgb[R], rgb[G], rgb[B]);
+            fprintf (fp, "%d %d %d\n", rgb[R], rgb[G], rgb[B]);
         }
     }
 

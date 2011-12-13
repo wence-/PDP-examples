@@ -9,18 +9,18 @@ SRC = mandelbrot.c
 OBJ=$(SRC:.c=.o)
 
 CC = mpicc
-CFLAGS=	-Wall -O2 -Iutils
+CFLAGS=	-Wall -O2 -Iutils -ggdb3
 
 LIBS = utils/arralloc.o utils/write_ppm.o utils/read_options.o
 
 all: mandelbrot
 
-$(OBJ):	$(MAKEFILE) $(SRC) $(INC)
+$(OBJ):	$(MAKEFILE) $(SRC) $(INC) utils
 
 utils:
 	$(MAKE) -C utils
 
-mandelbrot:	$(OBJ) utils
+mandelbrot:	$(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBS)
 
 

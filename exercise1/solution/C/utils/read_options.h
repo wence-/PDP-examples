@@ -1,22 +1,19 @@
 #ifndef READ_OPTIONS_H
 #define READ_OPTIONS_H
 
-void read_options(int, char**, int*, int*, float*, float*, float*, float*);
-
-/* size of entire GRID (in one dimenson)*/
-#define GRIDSIZE 768
+void read_options(int, char**, int*, int*, int *,
+                  float*, float*, float*, float*);
 
 
 /* default coordinates for calculation */
-#define XMIN (0.32)
-#define XMAX (0.39)
-#define YMIN (0.37)
-#define YMAX (0.44)
+#define XMIN (-2.0)
+#define XMAX (1.0)
+#define YMIN (-1.2)
+#define YMAX (1.2)
 
-/* 
- * #define X 0.0
- * #define Y 0.0
- */
+/* size of entire GRID */
+#define GRIDSIZE_X 768
+#define GRIDSIZE_Y (int)(GRIDSIZE_X * (YMAX - YMIN)/(XMAX - XMIN))
 
 /* default number of iterations */
 #define ITERATIONS 5000
