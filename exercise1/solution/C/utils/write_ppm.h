@@ -4,6 +4,6 @@
 
 enum { R = 0, G, B };
 
-void write_ppm(const char *, int **, int, int);
+void write_ppm(const char *, int **, int, int, int);
 
 #endif

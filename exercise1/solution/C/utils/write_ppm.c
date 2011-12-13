@@ -9,14 +9,14 @@
  * Convert a single iteration count to an RGB value by treating it as
  * an HSV triplet with saturation and value both set as 1 
  */
-static inline void gray_to_rgb(int gray, int rgb[3])
+static inline void gray_to_rgb(int gray, int rgb[3], int ncolours)
 {
     double h;
     double s = 1;
-    double v = MAX_COLOUR_VALS;
+    double v = ncolours;
     double f, p, q, t;
 
-    h = (360.0 * gray) / (60 * MAX_COLOUR_VALS);
+    h = (360.0 * gray) / (60 * ncolours);
     if ( h < 0 ) {
         /* Invalid colour, set to black */
         rgb[R] = 0;
@@ -73,12 +73,13 @@ static inline void gray_to_rgb(int gray, int rgb[3])
  * IMAGE is considered as a set of grayscale values that are converted
  * to RGB by mapping them onto HSV.
  */
-void write_ppm(const char *file, int **image, int xsize, int ysize)
+void write_ppm(const char *file, int **image, int xsize, int ysize, int max_iter)
 {
     int i;
     int j;
     FILE *fp;
     int rgb[3];
+    int ncolours = MAX_COLOUR_VALS;
     fp = fopen(file,"w");
 
     if ( NULL == fp ) {
@@ -97,11 +98,15 @@ void write_ppm(const char *file, int **image, int xsize, int ysize)
      *
      * All RGB values must be <= MAX_COLOURS
      */
-    fprintf(fp, "P3\n%d %d\n%d\n", xsize, ysize, MAX_COLOUR_VALS);
+    if ( max_iter < MAX_COLOUR_VALS ) {
+        ncolours = max_iter;
+    }
+
+    fprintf(fp, "P3\n%d %d\n%d\n", xsize, ysize, ncolours);
 
     for ( i = 0; i < ysize; i++ ) {
         for ( j = 0; j < xsize; j++ ) {
-            gray_to_rgb(image[i][j], rgb);
+            gray_to_rgb(image[i][j], rgb, ncolours);
             fprintf (fp, "%d %d %d\n", rgb[R], rgb[G], rgb[B]);
         }
     }
