@@ -104,7 +104,7 @@ void write_ppm(const char *file, int **image, int xsize, int ysize, int max_iter
 
     fprintf(fp, "P3\n%d %d\n%d\n", xsize, ysize, ncolours);
 
-    for ( i = 0; i < ysize; i++ ) {
+    for ( i = ysize-1; i >= 0; i-- ) {
         for ( j = 0; j < xsize; j++ ) {
             gray_to_rgb(image[i][j], rgb, ncolours);
             fprintf (fp, "%d %d %d\n", rgb[R], rgb[G], rgb[B]);
