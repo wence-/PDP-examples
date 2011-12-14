@@ -61,7 +61,7 @@ static inline void calc_slice_bounds(const int slice, const int nslice,
     *end = (slice + 1) * grid_size_y / nslice;
 }
 
-void copy_slice_to_image(const int **image_slice, int **image,
+void copy_slice_to_image(int **image_slice, int **image,
                          const int slice, const int nslice,
                          const int grid_size_x, const int grid_size_y)
 {
@@ -86,37 +86,24 @@ void copy_slice_to_image(const int **image_slice, int **image,
     if ( rank == 0 ) {
         int j;
         int k;
-        int *tmp;
         /* Copy local bit into global image */
         for ( i = start; i < end; i++ ) {
             for ( j = 0; j < grid_size_x; j++ ) {
                 image[i][j] = image_slice[i - start][j];
             }
         }
-        tmp = malloc(sizeof(int) * grid_size_x);
-        if ( NULL == tmp ) {
-            error(1, errno, "Unable to allocate memory for temp buffer\n");
-        }
-        /* Receive remote lines */
+        /* Receive remote slices */
         for ( k = 1; k < size; k++ ) {
             MPI_Recv(&start, 1, MPI_INT, k, 0, comm, &status);
             MPI_Recv(&end, 1, MPI_INT, k, 0, comm, &status);
-            for ( i = start; i < end; i++ ) {
-                MPI_Recv(tmp, grid_size_x, MPI_INT, k, 0, comm, &status);
-                for ( j = 0; j < grid_size_x; j++ ) {
-                    image[i][j] = tmp[j];
-                }
-            }
+            MPI_Recv(&(image[start][0]), grid_size_x * (end - start), MPI_INT,
+                     k, 0, comm, &status);
         }
-        free(tmp);
     } else {
         MPI_Send(&start, 1, MPI_INT, 0, 0, comm);
         MPI_Send(&end, 1, MPI_INT, 0, 0, comm);
-        /* We can't send the entire image in one go since it's not a
-         * real 2-D array so send one line at a time. */
-        for ( i = 0; i < end - start; i++ ) {
-            MPI_Send(image_slice[i], grid_size_x, MPI_INT, 0, 0, comm);
-        }
+        MPI_Send(&(image_slice[0][0]), grid_size_x * (end - start), MPI_INT,
+                 0, 0, comm);
     }
 }
 
