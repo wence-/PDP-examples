@@ -60,7 +60,7 @@ static inline void calc_slice_bounds(const int slice, const int nslice,
     *end = (slice + 1) * grid_size_y / nslice;
 }
 
-void copy_slice_to_image(const int **image_slice, int **image,
+void copy_slice_to_image(int **image_slice, int **image,
                          const int slice, const int nslice,
                          const int grid_size_x, const int grid_size_y)
 {
