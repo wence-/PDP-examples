@@ -61,21 +61,44 @@ static inline void calc_slice_bounds(const int slice, const int nslice,
     *end = (slice + 1) * grid_size_y / nslice;
 }
 
+static inline void send_image_slice(int **image_slice,
+                                    int start,
+                                    int end,
+                                    const int grid_size_x,
+                                    int dest,
+                                    MPI_Comm comm)
+{
+    MPI_Send(&start, 1, MPI_INT, 0, 0, comm);
+    MPI_Send(&end, 1, MPI_INT, 0, 0, comm);
+    MPI_Send(&(image_slice[0][0]), grid_size_x * (end - start), MPI_INT,
+             dest, 0, comm);
+}
+
+static inline void recv_image_slice(int **image,
+                                    const int grid_size_x,
+                                    int source,
+                                    MPI_Comm comm)
+{
+    int start;
+    int end;
+    MPI_Status status;
+    MPI_Recv(&start, 1, MPI_INT, source, 0, comm, &status);
+    MPI_Recv(&end, 1, MPI_INT, source, 0, comm, &status);
+    MPI_Recv(&(image[start][0]), grid_size_x * (end - start), MPI_INT,
+             source, 0, comm, &status);
+}
+
 void copy_slice_to_image(int **image_slice, int **image,
                          const int slice, const int nslice,
                          const int grid_size_x, const int grid_size_y)
 {
-    int i;
-    int rank;
-    int size;
     int start;
     int end;
+    int rank;
     MPI_Comm comm;
-    MPI_Status status;
 
     comm = MPI_COMM_WORLD;
     MPI_Comm_rank(comm, &rank);
-    MPI_Comm_size(comm, &size);
 
     /* We send these values to master process for writing because we
      * don't assume that the mapping from rank to slice is
@@ -84,26 +107,24 @@ void copy_slice_to_image(int **image_slice, int **image,
     calc_slice_bounds(slice, nslice, grid_size_y, &start, &end);
 
     if ( rank == 0 ) {
+        int i;
         int j;
-        int k;
+        int size;
+
         /* Copy local bit into global image */
         for ( i = start; i < end; i++ ) {
             for ( j = 0; j < grid_size_x; j++ ) {
                 image[i][j] = image_slice[i - start][j];
             }
         }
+
         /* Receive remote slices */
-        for ( k = 1; k < size; k++ ) {
-            MPI_Recv(&start, 1, MPI_INT, k, 0, comm, &status);
-            MPI_Recv(&end, 1, MPI_INT, k, 0, comm, &status);
-            MPI_Recv(&(image[start][0]), grid_size_x * (end - start), MPI_INT,
-                     k, 0, comm, &status);
+        MPI_Comm_size(comm, &size);
+        for ( i = 1; i < size; i++ ) {
+            recv_image_slice(image, grid_size_x, i, comm);
         }
     } else {
-        MPI_Send(&start, 1, MPI_INT, 0, 0, comm);
-        MPI_Send(&end, 1, MPI_INT, 0, 0, comm);
-        MPI_Send(&(image_slice[0][0]), grid_size_x * (end - start), MPI_INT,
-                 0, 0, comm);
+        send_image_slice(image_slice, start, end, grid_size_x, 0, comm);
     }
 }
 
