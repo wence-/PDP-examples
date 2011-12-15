@@ -1,92 +1,133 @@
+#+TITLE: PDP - Parallel Design Patterns - Practical Exercises
+#+AUTHOR: Adam Carter, Lawrence Mitchell
 
-PDP - Parallel Design Patterns - Practical Exercises
-====================================================
-
-Adam Carter <2011-11-21>
-
-* This directory contains:
-
-  - PDP.org
-    this file
-  - handouts
-    source in .tex format, makefile and output in .pdf format
-  - mandelbrot
-    the template files that will be tarred up and provided to students
-  - mandelbrot-solutions
-    source code that can be provided to students (1 week?) after the practical
-  
 * TODO Testing and Bug Fixing
-  
-** Practical 1 (Mandelbrot)
-  
-  - [ ] Command line options for Fortran to be tested
-  - [ ] Fix bug that swaps x and y coordinates in output image (C & Fortran)
+** TODO Practical 1 (Serial mandelbrot)
+   DEADLINE: <2012-01-18 Wed>
+*** DONE C
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-* TODO Write and test other practicals
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
-   For each practical:
+*** TODO Handout
+    - [X] Write instructions
+    - [ ] Do dry run (does it make sense?)
 
-   - Prepare the solution (C & Fortran)
-   - Prepare the template (C & Fortran)
-   - Prepare the PDF exercise sheet
-   - Upload files to web
-   
-** Practical 2
+** TODO Practical 2a (Serial domain decomposition)
+   DEADLINE: <2012-01-25 Wed>
+*** DONE C
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-    A parallel version of Mandelbrot using Domain Decomposition.
-    Keep it simple, with a minimal set of changes over the serial version.
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
-   - [ ] Prepare the solution (C & Fortran)
-   - [ ] Prepare the template (C & Fortran)
-   - [ ] Prepare the PDF exercise sheet
-   - [ ] Upload files to web
- 
-** Practical 3
+*** TODO Handout
+    - [ ] Write instructions
+    - [ ] Do dry run (does it make sense?)
 
-    Domain decomposition with function pointers.
-    Have a function that does a Mandelbrot calculation
-    Swap in an alternative function that does a Julia set changing
-    only the calculation function (possibly with small tweaks to
-    command line options)
+** TODO Practical 2b (Extend serial domain decomposition to parallel MPI)
+   DEADLINE: <2012-01-25 Wed>
+*** DONE C
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-   - [ ] Prepare the solution (C & Fortran)
-   - [ ] Prepare the template (C & Fortran)
-   - [ ] Prepare the PDF exercise sheet
-   - [ ] Upload files to web
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
-** Practical 4
+*** TODO Handout
+    - [ ] Write instructions
+    - [ ] Do dry run (does it make sense?)
 
-    Write a fork-join framework and apply it to Mandelbrot
+** TODO Practical 3 (Generalise practical 2b to add function pointers)
+   DEADLINE: <2012-02-01 Wed>
+   The idea here is that most of the scaffolding code is the same
+   whether you want to compute, say, the Mandelbrot of Julia sets.
+   The only different thing is the function that returns whether a
+   point is in the set or not.
+*** DONE C
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-    The program should start, and note the size of the problem. If
-    there are cores available, and the problem is sufficiently large
-    (for some basic definition of sufficiently) it should split the
-    problem in two and fork.
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
-   - [ ] Prepare the solution (C & Fortran)
-   - [ ] Prepare the template (C & Fortran)
-   - [ ] Prepare the PDF exercise sheet
-   - [ ] Upload files to web
- 
-** Practical 5
+*** TODO Handout
+    - [ ] Write instructions
+    - [ ] Do dry run (does it make sense?)
 
-    Write a task-farm framework and apply it to Mandelbrot
-    
-    In this case, the program should deal with a number of tasks
-    greater than the number of processors and the master should pass
-    these out on demand from workers.
+** TODO Practical 4 (Parallel task farm)
+   DEADLINE: <2012-02-08 Wed>
+   Write a task-farm framework and apply it to Mandelbrot
 
-   - [ ] Prepare the solution (C & Fortran)
-   - [ ] Prepare the template (C & Fortran)
-   - [ ] Prepare the PDF exercise sheet
-   - [ ] Upload files to web
- 
- 
-** Other Practicals?
-   
-   - If time allows, work with Mark P on a practical for MapReduce (or
-     for actors or dataflow) 
+   In this case, the program should deal with a number of tasks
+   greater than the number of processors and the master should pass
+   these out on demand from workers.
+*** TODO C
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
 
+*** TODO Handout
+    - [ ] Write instructions
+    - [ ] Do dry run (does it make sense?)
 
+** TODO Practical 5 (Fork/Join)
+   DEADLINE: <2012-02-15 Wed>
+   Write a fork-join framework and apply it to Mandelbrot
 
+   The program should start, and note the size of the problem. If
+   there are cores available, and the problem is sufficiently large
+   (for some basic definition of sufficiently) it should split the
+   problem in two and fork.
+*** TODO Decide on implementation strategy
+    The perhaps natural thing to do is to use pthreads.  In this case
+    we probably won't have a Fortran version because there's no native
+    wrapper for the the pthread library.  Everyone can read C anyway,
+    right?
+*** TODO C
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
+
+*** TODO Fortran
+    - [ ] Solution
+    - [ ] Template
+    - [ ] Test
+
+*** TODO Handout
+    - [ ] Write instructions
+    - [ ] Do dry run (does it make sense?)
+
+** TODO Other Practicals?
+   DEADLINE: <2012-02-29 Wed>
+
+   If time allows, work with Mark P on a practical for MapReduce (or
+   for actors or dataflow)
