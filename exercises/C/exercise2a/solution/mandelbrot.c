@@ -148,12 +148,10 @@ int main(int argc, char** argv)
                  &xmin, &xmax, &ymin, &ymax);
 
     initialise_image(&image, grid_size_x, grid_size_y);
-    write_ppm("input.ppm", image, grid_size_x, grid_size_y, max_iter);
 
     compute_mandelbrot_set(image, xmin, xmax, ymin, ymax,
                            grid_size_x, grid_size_y, max_iter);
 
-    /* Sort out colours and write out the output file. */
     write_ppm("output.ppm", image, grid_size_x, grid_size_y, max_iter);
 
     free(image);

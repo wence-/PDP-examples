@@ -225,7 +225,6 @@ int main(int argc, char** argv)
 
     if ( rank == 0 ) {
         initialise_image(&image, grid_size_x, grid_size_y);
-        write_ppm("input.ppm", image, grid_size_x, grid_size_y, max_iter);
     }
 
     compute_set(image, &point_in_julia_set,

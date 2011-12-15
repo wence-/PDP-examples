@@ -43,8 +43,6 @@ int main(int argc, char** argv)
 
     initialise_image(&image, grid_size_x, grid_size_y);
 
-    write_ppm("input.ppm", image, grid_size_x, grid_size_y, max_iter);
-
     /* Compute the mandelbrot set here and write results into image array */
 
     write_ppm("output.ppm", image, grid_size_x, grid_size_y, max_iter);
