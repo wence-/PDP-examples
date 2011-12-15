@@ -23,7 +23,7 @@ static inline int point_in_mandelbrot_set(const float x0,
         x2 = x * x;
         y2 = y * y;
         /* z = (z*z) + c */
-        if ( x2 + y2 >= 4.0 ) {
+        if ( x2 + y2 > 4.0 ) {
             return i;
         } else {
             y = y0 + (2.0 * x * y);
@@ -56,7 +56,7 @@ static inline int point_in_julia_set(const float x0,
     x = x0;
     y = y0;
     for ( i = 0; i < max_iter; i++ ) {
-        if ( x * x + y * y >= 4.0 ) {
+        if ( x * x + y * y > 4.0 ) {
             return i;
         } else {
             julia_fn(&x, &y);
