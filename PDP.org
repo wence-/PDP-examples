@@ -1,0 +1,92 @@
+
+PDP - Parallel Design Patterns - Practical Exercises
+====================================================
+
+Adam Carter <2011-11-21>
+
+* This directory contains:
+
+  - PDP.org
+    this file
+  - handouts
+    source in .tex format, makefile and output in .pdf format
+  - mandelbrot
+    the template files that will be tarred up and provided to students
+  - mandelbrot-solutions
+    source code that can be provided to students (1 week?) after the practical
+  
+* TODO Testing and Bug Fixing
+  
+** Practical 1 (Mandelbrot)
+  
+  - [ ] Command line options for Fortran to be tested
+  - [ ] Fix bug that swaps x and y coordinates in output image (C & Fortran)
+
+* TODO Write and test other practicals
+
+   For each practical:
+
+   - Prepare the solution (C & Fortran)
+   - Prepare the template (C & Fortran)
+   - Prepare the PDF exercise sheet
+   - Upload files to web
+   
+** Practical 2
+
+    A parallel version of Mandelbrot using Domain Decomposition.
+    Keep it simple, with a minimal set of changes over the serial version.
+
+   - [ ] Prepare the solution (C & Fortran)
+   - [ ] Prepare the template (C & Fortran)
+   - [ ] Prepare the PDF exercise sheet
+   - [ ] Upload files to web
+ 
+** Practical 3
+
+    Domain decomposition with function pointers.
+    Have a function that does a Mandelbrot calculation
+    Swap in an alternative function that does a Julia set changing
+    only the calculation function (possibly with small tweaks to
+    command line options)
+
+   - [ ] Prepare the solution (C & Fortran)
+   - [ ] Prepare the template (C & Fortran)
+   - [ ] Prepare the PDF exercise sheet
+   - [ ] Upload files to web
+
+** Practical 4
+
+    Write a fork-join framework and apply it to Mandelbrot
+
+    The program should start, and note the size of the problem. If
+    there are cores available, and the problem is sufficiently large
+    (for some basic definition of sufficiently) it should split the
+    problem in two and fork.
+
+   - [ ] Prepare the solution (C & Fortran)
+   - [ ] Prepare the template (C & Fortran)
+   - [ ] Prepare the PDF exercise sheet
+   - [ ] Upload files to web
+ 
+** Practical 5
+
+    Write a task-farm framework and apply it to Mandelbrot
+    
+    In this case, the program should deal with a number of tasks
+    greater than the number of processors and the master should pass
+    these out on demand from workers.
+
+   - [ ] Prepare the solution (C & Fortran)
+   - [ ] Prepare the template (C & Fortran)
+   - [ ] Prepare the PDF exercise sheet
+   - [ ] Upload files to web
+ 
+ 
+** Other Practicals?
+   
+   - If time allows, work with Mark P on a practical for MapReduce (or
+     for actors or dataflow) 
+
+
+
+
