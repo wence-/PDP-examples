@@ -27,12 +27,6 @@ void read_options(int argc, char**argv,
             if ( tmp >= 4 ) *gridSizeX = tmp;
             else fprintf(stderr, "Using default grid size.\n");
             break;
-        case 's':
-            /* option -S: grid size in Y dimension */
-            tmp = atoi(optarg);
-            if ( tmp >= 4 ) *gridSizeY = tmp;
-            else fprintf(stderr, "Using default grid size.\n");
-            break;
         case 'i':
             /* option -i: number of iterations for the calculation */
             tmp = atoi(optarg);
@@ -73,7 +67,7 @@ void read_options(int argc, char**argv,
             printf("Usage:\n");
             printf("mandelbrot [-SixXyYh]\n");
             printf("   -S NPIXEL    Set number of pixels in X dimension of image\n");
-            printf("   -s NPIXEL    Set number of pixels in Y dimension of image\n");
+            printf("                Y dimension is scaled to keep square aspect ratio\n");
             printf("   -i ITS       Set max number of iterations for a point to be inside\n");
             printf("   -x XMIN      Set xmin coordinate\n");
             printf("   -X XMAX      Set xmax coordinate\n");
@@ -100,5 +94,7 @@ void read_options(int argc, char**argv,
         *yMin = YMIN;
         *yMax = YMAX;
     }
+
+    *gridSizeY = (int)(*gridSizeX * (*yMax - *yMin)/(*xMax - *xMin));
 }
  
