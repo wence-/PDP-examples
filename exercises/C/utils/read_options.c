@@ -50,7 +50,6 @@ void read_options(int argc, char**argv,
         case 'y':
             /* option -y:
                for Mandelbrot set: ymin coordinate of the image
-               for Julia set: y starting point coordinate
             */
             ftmp = atof(optarg);
             *yMin = ftmp;
@@ -71,7 +70,7 @@ void read_options(int argc, char**argv,
             printf("   -i ITS       Set max number of iterations for a point to be inside\n");
             printf("   -x XMIN      Set xmin coordinate\n");
             printf("   -X XMAX      Set xmax coordinate\n");
-            printf("   -y YMIN      Set ymin coordinate (mandelbrot) or starting point (Julia)\n");
+            printf("   -y YMIN      Set ymin coordinate\n");
             printf("   -Y YMAX      Set ymax coordinate\n");
             printf("   -h           Show this help\n");
             exit(-1);
