@@ -66,7 +66,7 @@ void read_options(int argc, char**argv,
             printf("Usage:\n");
             printf("mandelbrot [-SixXyYh]\n");
             printf("   -S NPIXEL    Set number of pixels in X dimension of image\n");
-            printf("                Y dimension is scaled to keep square aspect ratio\n");
+            printf("                Y dimension is scaled to ensure pixels are square\n");
             printf("   -i ITS       Set max number of iterations for a point to be inside\n");
             printf("   -x XMIN      Set xmin coordinate\n");
             printf("   -X XMAX      Set xmax coordinate\n");
