@@ -4,8 +4,6 @@ module read_opt
   complex, parameter :: MAX = (1, 1.2)
 
   integer, parameter :: GRIDSIZE_X = 768
-  integer, parameter :: GRIDSIZE_Y = int(GRIDSIZE_X * &
-       aimag(MAX - MIN) / real(MAX - MIN))
 
   integer, parameter :: ITERATIONS = 5000
 contains
@@ -31,8 +29,14 @@ contains
     cmax = MAX
 
     do
+       if ( i .gt. nargs ) exit
        call get_command_argument(i, value=arg)
-       call get_command_argument(i+1, value=opt)
+       if ( i+1 .gt. nargs .and. (trim(arg(2:)) .ne. 'h') ) then
+          write(*,*)"Argument `", trim(arg), "' needs a value"
+          arg = '?'
+       else
+          call get_command_argument(i+1, value=opt)
+       end if
 
        select case(trim(arg(2:)))
        case ('S')
@@ -66,7 +70,6 @@ contains
           stop
        end select
        i = i + 2
-       if ( i .gt. nargs ) exit
     end do
 
     if ( real(cmin) .ge. real(cmax) ) cmin = cmplx(real(MIN), aimag(cmin))
