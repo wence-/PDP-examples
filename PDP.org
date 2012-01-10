@@ -2,8 +2,10 @@
 #+AUTHOR: Adam Carter, Lawrence Mitchell
 
 * TODO Testing and Bug Fixing
-** TODO Practical 1 (Serial mandelbrot)
+** DONE Practical 1 (Serial mandelbrot)
    DEADLINE: <2012-01-18 Wed>
+   :LOGBOOK:
+   :END:
 *** DONE C
     :LOGBOOK:
     :END:
@@ -11,14 +13,18 @@
     - [X] Template
     - [X] Test
 
-*** TODO Fortran
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE Fortran
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-*** TODO Handout
+*** DONE Handout
+    :LOGBOOK:
+    :END:
     - [X] Write instructions
-    - [ ] Do dry run (does it make sense?)
+    - [X] Do dry run (does it make sense?)
 
 ** TODO Practical 2a (Serial domain decomposition)
    DEADLINE: <2012-01-25 Wed>
