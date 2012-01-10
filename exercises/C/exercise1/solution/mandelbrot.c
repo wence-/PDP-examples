@@ -78,13 +78,13 @@ void compute_mandelbrot_set(int **image,
 
 int main(int argc, char** argv)
 {
-    int grid_size_x = GRIDSIZE_X;
-    int grid_size_y = GRIDSIZE_Y;
-    int max_iter = ITERATIONS;
-    float xmin = XMIN;
-    float xmax = XMAX;
-    float ymin = YMIN;
-    float ymax = YMAX;
+    int grid_size_x;
+    int grid_size_y;
+    int max_iter;
+    float xmin;
+    float xmax;
+    float ymin;
+    float ymax;
     int **image;
 
     read_options(argc, argv, &grid_size_x, &grid_size_y, &max_iter,

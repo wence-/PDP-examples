@@ -16,7 +16,13 @@ void read_options(int argc, char**argv,
     int count;
     int tmp;
     float ftmp;
-  
+
+    *gridSizeX = GRIDSIZE_X;
+    *xMin = XMIN;
+    *xMax = XMAX;
+    *yMin = YMIN;
+    *yMax = YMAX;
+    *iter = ITERATIONS;
     /* loop over command line arguments */
     while ( (count = getopt(argc, argv, "s:S:i:x:X:y:Y:mjh")) != -1 ) {
         switch (count) {

@@ -11,9 +11,9 @@ void read_options(int, char**, int*, int*, int *,
 #define YMIN (-1.2)
 #define YMAX (1.2)
 
-/* size of entire GRID */
+/* size of entire grid in X dimension (Y dimension is scaled
+ * appropriately) */
 #define GRIDSIZE_X 768
-#define GRIDSIZE_Y (int)(GRIDSIZE_X * (YMAX - YMIN)/(XMAX - XMIN))
 
 /* default number of iterations */
 #define ITERATIONS 5000
