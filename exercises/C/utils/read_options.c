@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "read_options.h"
-  
-void read_options(int argc, char**argv, 
+
+void read_options(int argc, char**argv,
                   int* gridSizeX,
                   int* gridSizeY,
                   int* iter,
@@ -12,7 +12,7 @@ void read_options(int argc, char**argv,
                   float* yMin,
                   float* yMax)
 {
-  
+
     int count;
     int tmp;
     float ftmp;
@@ -26,7 +26,7 @@ void read_options(int argc, char**argv,
     /* loop over command line arguments */
     while ( (count = getopt(argc, argv, "s:S:i:x:X:y:Y:mjh")) != -1 ) {
         switch (count) {
-      
+
         case 'S':
             /* option -S: grid size in X dimension */
             tmp = atoi(optarg);
@@ -39,7 +39,7 @@ void read_options(int argc, char**argv,
             if ( tmp > 0 ) *iter = tmp;
             else fprintf(stderr, "Using default number of iterations.\n");
             break;
-      
+
         case 'x':
             /* option -x:
                for Mandelbrot set: xmin coordinate of the image */
@@ -52,7 +52,7 @@ void read_options(int argc, char**argv,
             ftmp = atof(optarg);
             *xMax = ftmp;
             break;
-      
+
         case 'y':
             /* option -y:
                for Mandelbrot set: ymin coordinate of the image
@@ -60,7 +60,7 @@ void read_options(int argc, char**argv,
             ftmp = atof(optarg);
             *yMin = ftmp;
             break;
-      
+
         case 'Y':
             /* option -Y: ymax coordinate of the image */
             ftmp = atof(optarg);
@@ -81,18 +81,18 @@ void read_options(int argc, char**argv,
             printf("   -h           Show this help\n");
             exit(-1);
         }
-    
 
-    } 
-  
-    
+
+    }
+
+
     /* check that xMin is smaller than xMax, if not, reassign the default values */
     if ( *xMin >= *xMax ) {
         fprintf(stderr, "WARNING: xMin has to be smaller than xMax.\n Reassign default values.\n");
         *xMin = XMIN;
         *xMax = XMAX;
     }
-  
+
     /* check that yMin is smaller than yMax, if not, reassign the default values */
     if ( *yMin >= *yMax ) {
         fprintf(stderr, "WARNING: yMin has to be smaller than yMax.\n Reassign default values.\n");
@@ -102,4 +102,3 @@ void read_options(int argc, char**argv,
 
     *gridSizeY = (int)(*gridSizeX * (*yMax - *yMin)/(*xMax - *xMin));
 }
- 

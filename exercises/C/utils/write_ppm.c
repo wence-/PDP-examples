@@ -7,7 +7,7 @@
 
 /*
  * Convert a single iteration count to an RGB value by treating it as
- * an HSV triplet with saturation and value both set as 1 
+ * an HSV triplet with saturation and value both set as 1
  */
 static inline void gray_to_rgb(int gray, int rgb[3], int ncolours)
 {
@@ -25,7 +25,7 @@ static inline void gray_to_rgb(int gray, int rgb[3], int ncolours)
         return;
     }
     f = h - (int)h;
-    
+
     p = v * (1 - s);
     q = v * (1 - s * f);
     t = v * (1 - s * (1 - f));
