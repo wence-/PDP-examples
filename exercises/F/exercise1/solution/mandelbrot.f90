@@ -20,12 +20,17 @@ program mandelbrot
   call write_ppm("output.ppm", image, max_iter)
 
   deallocate(image)
-contains
-  subroutine initialise_image(image, x, y)
-    integer, intent(out), allocatable, dimension(:,:) :: image
-    integer, intent(in) :: x, y
 
-    allocate(image(x, y))
+contains
+
+  ! Initialise the data for the image array.  Data is stored in
+  ! "scanline order", i.e. x dimension varies fastest.  You get an
+  ! array with shape (grid_size_x, grid_size_y) from this function
+  subroutine initialise_image(image, grid_size_x, grid_size_y)
+    integer, intent(out), allocatable, dimension(:,:) :: image
+    integer, intent(in) :: grid_size_x, grid_size_y
+
+    allocate(image(grid_size_x, grid_size_y))
     image = -1
   end subroutine initialise_image
 
@@ -66,6 +71,7 @@ contains
     ipart = aimag(max - min) / grid_size_y
     do j = 1, grid_size_y
        do i = 1, grid_size_x
+          ! Calculate coordinate value of current pixel
           c = min + cmplx(rpart * real(i-1), ipart * real(j-1))
           image(i, j) = point_in_mandelbrot_set(c, max_iter)
        end do
