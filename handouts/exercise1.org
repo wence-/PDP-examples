@@ -70,6 +70,15 @@ and
  z^2 = x^2 - y^2 + \mathrm{i} (2 x y)
 \end{equation} 
 
+Although we use Fortran's built-in complex number support, you may
+still need to do computations with the real and imaginary parts
+separately.  You may need:
+#+begin_src f90
+  rpart = real(c)                 ! The real part of c
+  ipart = aimag(c)                ! The imaginary part of c
+  z = cmplx(rpart, ipart)         ! A new complex number
+#+end_src
+
 * Setup
 
 You will be carrying out these exercises on =ness=, so log in and
