@@ -3,7 +3,7 @@
 
 * TODO Testing and Bug Fixing
 ** DONE Practical 1 (Serial mandelbrot)
-   DEADLINE: <2012-01-18 Wed>
+   DEADLINE: <2012-01-17 Tue>
    :LOGBOOK:
    :END:
 *** DONE C
@@ -27,7 +27,7 @@
     - [X] Do dry run (does it make sense?)
 
 ** TODO Practical 2a (Serial domain decomposition)
-   DEADLINE: <2012-01-25 Wed>
+   DEADLINE: <2012-01-24 Tue>
 *** DONE C
     :LOGBOOK:
     :END:
@@ -45,7 +45,7 @@
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 2b (Extend serial domain decomposition to parallel MPI)
-   DEADLINE: <2012-01-25 Wed>
+   DEADLINE: <2012-01-24 Tue>
 *** DONE C
     :LOGBOOK:
     :END:
@@ -63,7 +63,7 @@
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 3 (Generalise practical 2b to add function pointers)
-   DEADLINE: <2012-02-01 Wed>
+   DEADLINE: <2012-01-31 Tue>
    The idea here is that most of the scaffolding code is the same
    whether you want to compute, say, the Mandelbrot of Julia sets.
    The only different thing is the function that returns whether a
@@ -85,7 +85,7 @@
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 4 (Parallel task farm)
-   DEADLINE: <2012-02-08 Wed>
+   DEADLINE: <2012-02-07 Tue>
    Write a task-farm framework and apply it to Mandelbrot
 
    In this case, the program should deal with a number of tasks
@@ -106,7 +106,7 @@
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 5 (Fork/Join)
-   DEADLINE: <2012-02-15 Wed>
+   DEADLINE: <2012-02-14 Tue>
    Write a fork-join framework and apply it to Mandelbrot
 
    The program should start, and note the size of the problem. If
@@ -133,7 +133,7 @@
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Other Practicals?
-   DEADLINE: <2012-02-29 Wed>
+   DEADLINE: <2012-02-28 Tue>
 
    If time allows, work with Mark P on a practical for MapReduce (or
    for actors or dataflow)
