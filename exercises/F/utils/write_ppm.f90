@@ -7,6 +7,9 @@ module write_image
   private
   public :: write_ppm
 contains
+
+  ! Convert a single iteration count to an RGB value by treating it
+  ! as an HSV triplet with saturation and value both set to 1
   function gray_to_rgb(gray, ncolours) result(rgb)
     integer, intent(in) :: gray
     integer, intent(in) :: ncolours
@@ -62,6 +65,10 @@ contains
     end select
   end function gray_to_rgb
 
+  ! Write a PPM file containing the pixels in IMAGE to FILE
+  !
+  ! IMAGE is considered as a set of grayscale values that are
+  ! converted to RGB by mapping them onto HSV.
   subroutine write_ppm(file, image, max_iter)
     character(len=*), intent(in):: file
     integer, dimension(:,:), intent(in) :: image
@@ -70,6 +77,15 @@ contains
     integer :: ncolours
     ncolours = MAX_COLOUR_VALS
 
+    ! PPM format is:
+    ! P3
+    ! WIDTH HEIGHT
+    ! MAX_COLOURS
+    ! R G B
+    ! R G B
+    ! ...
+    !
+    ! All RGB values must be <= MAX_COLOURS
     if ( max_iter .lt. ncolours ) then
        ncolours = max_iter
     end if
