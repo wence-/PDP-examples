@@ -35,10 +35,12 @@
     - [X] Template
     - [X] Test
 
-*** TODO Fortran
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE Fortran
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
 *** TODO Handout
     - [ ] Write instructions
