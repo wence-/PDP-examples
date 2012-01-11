@@ -82,16 +82,22 @@ separately.  You may need:
 * Setup
 
 You will be carrying out these exercises on =ness=, so log in and
-download the tar file for the exercise (available at
-[[http://www.epcc.ed.ac.uk/msc/courses/PDP/exercise1.tar]]) and unpack
+download the tar file for the exercise (available on WebCT) and unpack
 it.  Change into the =mandelbrot= directory that has just been created.
 There are two subdirectories =C= and =F= corresponding to the C and
-Fortran versions of the exercise respectively.  Each subdirectory also
-contains a =Makefile= that compiles the code.  The template codes
-compile as is to produce a =mandelbrot= executable.  If you run this, it
-will produce an output image.  Until you have implemented the code to
-calculate the Mandelbrot set, this image will just be black.  To view
-the image, type =display output.ppm=.
+Fortran versions of the exercise respectively.  These contain a =utils=
+directory which you should not have to touch, and a =exercise1/template=
+directory with template code.  To build the template =C= code, do
+: cd C/exercise1/template
+: make
+This builds the utility code and the template code to produce a
+=mandelbrot= executable.  The Fortran template code can be built in the
+same way, but in the directory =F/exercise1/template= instead.
+
+If you run the =mandelbrot= executable, it will produce an output image.
+Until you have implemented the code to calculate the Mandelbrot set,
+this image will just be black.  To view the image, type =display
+output.ppm=.
 
 The executable accepts a number of command line arguments, which you
 can see by passing the =-h= flag.
