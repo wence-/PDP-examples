@@ -8,10 +8,10 @@ SRC = mandelbrot.c
 
 OBJ=$(SRC:.c=.o)
 
-CC = mpicc
+include ../../../config.mak
 
 LIBDIR = ../../utils
-CFLAGS=	-Wall -O2 -I$(LIBDIR)
+CFLAGS := $(CFLAGS) -I$(LIBDIR)
 
 LIBS = $(LIBDIR)/arralloc.o $(LIBDIR)/write_ppm.o $(LIBDIR)/read_options.o
 

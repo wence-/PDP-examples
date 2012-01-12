@@ -6,11 +6,10 @@
 #
 SRC = mandelbrot.f90
 
-
-FC = mpif90
+include ../../../config.mak
 
 LIBDIR = ../../utils
-FFLAGS=	-Wall -O2 -I$(LIBDIR)
+FFLAGS := $(FFLAGS) -I$(LIBDIR)
 
 LIBS = $(LIBDIR)/write_ppm.o $(LIBDIR)/read_options.o
 
