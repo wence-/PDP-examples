@@ -68,8 +68,8 @@ static inline void send_image_slice(int **image_slice,
                                     int dest,
                                     MPI_Comm comm)
 {
-    MPI_Send(&start, 1, MPI_INT, 0, 0, comm);
-    MPI_Send(&end, 1, MPI_INT, 0, 0, comm);
+    MPI_Send(&start, 1, MPI_INT, dest, 0, comm);
+    MPI_Send(&end, 1, MPI_INT, dest, 0, comm);
     MPI_Send(&(image_slice[0][0]), grid_size_x * (end - start), MPI_INT,
              dest, 0, comm);
 }
