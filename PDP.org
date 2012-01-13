@@ -43,7 +43,7 @@
     - [X] Test
 
 *** TODO Handout
-    - [ ] Write instructions
+    - [X] Write instructions
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 2b (Extend serial domain decomposition to parallel MPI)
@@ -55,13 +55,15 @@
     - [X] Template
     - [X] Test
 
-*** TODO Fortran
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE Fortran
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
 *** TODO Handout
-    - [ ] Write instructions
+    - [X] Write instructions
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 3 (Generalise practical 2b to add function pointers)
