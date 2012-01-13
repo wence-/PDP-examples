@@ -53,7 +53,7 @@ contains
 
     call calc_slice_bounds(slice, nslice, size(image, 2), start, end)
 
-    image(:, start:end) = image_slice
+    image(:, start:end-1) = image_slice
   end subroutine copy_slice_to_image
 
   pure function point_in_mandelbrot_set(c, max_iter) result(ret)
