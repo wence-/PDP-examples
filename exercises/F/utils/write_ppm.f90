@@ -96,7 +96,7 @@ contains
     write(10, *) size(image, 1), size(image, 2)
     write(10, *) ncolours
 
-    do j = 1, size(image, 2)
+    do j = size(image, 2), 1, -1
        do i = 1, size(image, 1)
           write(10, *)gray_to_rgb(image(i, j), ncolours)
        end do
