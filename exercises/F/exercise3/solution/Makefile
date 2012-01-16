@@ -4,7 +4,9 @@
 #
 # lists of sources, etc
 #
-SRC = mandelbrot.f90
+SRC = fractal-set.f90
+
+EXE = fractal-set
 
 include ../../../config.mak
 
@@ -13,17 +15,17 @@ FFLAGS := $(FFLAGS) -I$(LIBDIR)
 
 LIBS = $(LIBDIR)/write_ppm.o $(LIBDIR)/read_options.o
 
-all: mandelbrot
+all: $(EXE)
 
 utils:
 	$(MAKE) -C $(LIBDIR)
 
-mandelbrot:	$(SRC) utils
+$(EXE):	$(SRC) utils
 	$(MPIF90) $(FFLAGS) -o $@ $(SRC) $(LIBS)
 
 
 clean: clean-utils
-	rm -f mandelbrot *~ $(OBJ) $(EXE) core
+	rm -f $(EXE) *~ $(OBJ) $(EXE) core
 
 clean-utils:
 	$(MAKE) -C $(LIBDIR) clean

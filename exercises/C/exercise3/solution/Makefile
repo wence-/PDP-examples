@@ -4,8 +4,9 @@
 #
 # lists of sources, etc
 #
-SRC = mandelbrot.c
+SRC = fractal-set.c
 
+EXE = fractal-set
 OBJ=$(SRC:.c=.o)
 
 include ../../../config.mak
@@ -15,7 +16,7 @@ CFLAGS := $(CFLAGS) -I$(LIBDIR)
 
 LIBS = $(LIBDIR)/arralloc.o $(LIBDIR)/write_ppm.o $(LIBDIR)/read_options.o
 
-all: mandelbrot
+all: $(EXE)
 
 $(OBJ):	$(MAKEFILE) $(SRC) $(INC) utils
 
@@ -25,12 +26,12 @@ $(OBJ):	$(MAKEFILE) $(SRC) $(INC) utils
 utils:
 	$(MAKE) -C $(LIBDIR)
 
-mandelbrot:	$(OBJ)
+$(EXE):	$(OBJ)
 	$(MPICC) $(CFLAGS) -o $@ $(OBJ) $(LIBS)
 
 
 clean: clean-utils
-	rm -f mandelbrot *~ $(OBJ) $(EXE) core
+	rm -f $(EXE) *~ $(OBJ) $(EXE) core
 
 clean-utils:
 	$(MAKE) -C $(LIBDIR) clean
