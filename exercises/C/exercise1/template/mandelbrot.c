@@ -43,7 +43,20 @@ int main(int argc, char** argv)
 
     initialise_image(&image, grid_size_x, grid_size_y);
 
-    /* Compute the mandelbrot set here and write results into image array */
+    /* Compute the mandelbrot set here and write results into image
+     * array.  Note that the image writing code assumes the following
+     * mapping from array entries to pixel positions in the image:
+     *
+     * A == image[0][0]
+     * B == image[grid_size_y-1][0]
+     * C == image[grid_size_y-1][grid_size_x-1]
+     * D == image[0][grid_size_x-1]
+     *
+     *         B-----------------C
+     *         |                 |
+     *         |                 |
+     *         A-----------------D
+     */
 
     write_ppm("output.ppm", image, grid_size_x, grid_size_y, max_iter);
 
