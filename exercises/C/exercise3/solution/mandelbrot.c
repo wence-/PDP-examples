@@ -39,8 +39,8 @@ static inline void julia_fn(float *x, float *y)
 {
     float x0;
     float y0;
-    const float cre = 0;
-    const float cim = 1;
+    const float cre = 0.285;
+    const float cim = 0.01;
     x0 = *x;
     y0 = *y;
 
