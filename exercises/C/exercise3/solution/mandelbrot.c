@@ -8,6 +8,8 @@
 #include "write_ppm.h"
 #include "read_options.h"
 
+typedef (*in_set_fn_t)(const float, const float, const int);
+
 static inline int point_in_mandelbrot_set(const float x0,
                                           const float y0,
                                           const int max_iter)
@@ -139,7 +141,7 @@ void copy_slice_to_image(int **image_slice, int **image,
     }
 }
 
-int **compute_slice(int (*in_set_fn)(const float, const float, const int),
+int **compute_slice(in_set_fn_t in_set_fn,
                     const int slice, const int nslice,
                     const float xmin, const float xmax,
                     const float ymin, const float ymax,
@@ -169,7 +171,7 @@ int **compute_slice(int (*in_set_fn)(const float, const float, const int),
     return image_slice;
 }
 
-void compute_set(int (*in_set_fn)(const float, const float, const int),
+void compute_set(in_set_fn_t in_set_fn,
                  int **image,
                  const float xmin,
                  const float xmax,
@@ -214,7 +216,7 @@ int main(int argc, char** argv)
     int **image;
     int rank;
     MPI_Comm comm;
-    int (*fp)(const float, const float, const int);
+    in_set_fn_t fp;
 
     MPI_Init(&argc, &argv);
 
