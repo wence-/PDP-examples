@@ -45,7 +45,7 @@ contains
 
     do i = 1, max_iter
        if ( real(z * conjg(z)) .gt. 4.0 ) then
-          ret = i
+          ret = i-1
           return
        else
           z = z**2 + c
