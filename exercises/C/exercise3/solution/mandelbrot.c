@@ -169,8 +169,8 @@ int **compute_slice(int (*in_set_fn)(const float, const float, const int),
     return image_slice;
 }
 
-void compute_set(int **image,
-                 int (*in_set_fn)(const float, const float, const int),
+void compute_set(int (*in_set_fn)(const float, const float, const int),
+                 int **image,
                  const float xmin,
                  const float xmax,
                  const float ymin,
@@ -214,6 +214,7 @@ int main(int argc, char** argv)
     int **image;
     int rank;
     MPI_Comm comm;
+    int (*fp)(const float, const float, const int);
 
     MPI_Init(&argc, &argv);
 
@@ -227,7 +228,9 @@ int main(int argc, char** argv)
         initialise_image(&image, grid_size_x, grid_size_y);
     }
 
-    compute_set(image, &point_in_julia_set,
+    fp = &point_in_julia_set;
+
+    compute_set(fp, image,
                 xmin, xmax, ymin, ymax,
                 grid_size_x, grid_size_y, max_iter);
 
