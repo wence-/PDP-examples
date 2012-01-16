@@ -79,13 +79,15 @@
     - [X] Template
     - [X] Test
 
-*** TODO Fortran
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE Fortran
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
 *** TODO Handout
-    - [ ] Write instructions
+    - [X] Write instructions
     - [ ] Do dry run (does it make sense?)
 
 ** TODO Practical 4 (Parallel task farm)
@@ -141,3 +143,4 @@
 
    If time allows, work with Mark P on a practical for MapReduce (or
    for actors or dataflow)
+   
