@@ -19,6 +19,9 @@ all: mandelbrot
 
 $(OBJ):	$(MAKEFILE) $(SRC) $(INC) utils
 
+.c.o:
+	$(MPICC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+
 utils:
 	$(MAKE) -C $(LIBDIR)
 
