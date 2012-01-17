@@ -1,5 +1,5 @@
 CC = pgcc
-FC = pgif90
+FC = pgf90
 MPICC = mpicc
 MPIF90 = mpif90
 CFLAGS = -O2
