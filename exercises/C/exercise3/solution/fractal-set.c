@@ -8,7 +8,7 @@
 #include "write_ppm.h"
 #include "read_options.h"
 
-typedef (*in_set_fn_t)(const float, const float, const int);
+typedef int (*in_set_fn_t)(const float, const float, const int);
 
 static inline int point_in_mandelbrot_set(const float x0,
                                           const float y0,
