@@ -39,7 +39,7 @@ set.  We limit the number of iterations to some finite value
 $n_{\mathrm{max}}$.  To check if a complex number $c$ is in the set we
 use the following algorithm.
 
-1. Let $z_0 = 0$
+1. Let $z_0 = c$
 2. If $|z_0| > 2$, $c$ is outside the set, return 0
 3. Compute $z_{n+1} = z_n^2 + c$
    1. If $|z_{n+1}| > 2$, $c$ is outside the set, return $n+1$
