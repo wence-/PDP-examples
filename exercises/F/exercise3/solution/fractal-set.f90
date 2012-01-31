@@ -1,16 +1,62 @@
-program mandelbrot
-  use mpi
-  use write_image
-  use read_opt
-
+module fnptr
   implicit none
-
   abstract interface
      integer function fn(c, max_iter)
        complex, intent(in) :: c
        integer, intent(in) :: max_iter
      end function fn
   end interface
+
+contains
+
+  pure function point_in_mandelbrot_set(c, max_iter) result(ret)
+    complex, intent(in) :: c
+    integer, intent(in) :: max_iter
+    integer :: ret
+    integer :: i
+    complex :: z
+
+    z = c
+
+    do i = 1, max_iter
+       if ( real(z * conjg(z)) .gt. 4.0 ) then
+          ret = i-1
+          return
+       else
+          z = z**2 + c
+       end if
+    end do
+    ret = max_iter
+  end function point_in_mandelbrot_set
+
+  pure function point_in_julia_set(c, max_iter) result(ret)
+    complex, intent(in) :: c
+    integer, intent(in) :: max_iter
+    integer :: ret
+    integer :: i
+    complex :: z
+
+    z = c
+    do i = 1, max_iter
+       if ( real(z * conjg(z)) .gt. 4.0 ) then
+          ret = i-1
+          return
+       else
+          z = z**2 + cmplx(0.285, 0.01)
+       end if
+    end do
+    ret = max_iter
+  end function point_in_julia_set
+
+end module fnptr
+
+program mandelbrot
+  use mpi
+  use write_image
+  use read_opt
+  use fnptr
+
+  implicit none
 
   integer, allocatable, dimension(:,:) :: image
 
@@ -83,7 +129,7 @@ contains
     integer, intent(inout), dimension(:,:) :: image
     integer, intent(in) :: source
     integer, intent(in) :: comm
-    
+
     integer :: start, end, ierr
     integer, dimension(MPI_STATUS_SIZE) :: status
 
@@ -124,48 +170,9 @@ contains
     end if
   end subroutine copy_slice_to_image
 
-  pure function point_in_mandelbrot_set(c, max_iter) result(ret)
-    complex, intent(in) :: c
-    integer, intent(in) :: max_iter
-    integer :: ret
-    integer :: i
-    complex :: z
-
-    z = c
-
-    do i = 1, max_iter
-       if ( real(z * conjg(z)) .gt. 4.0 ) then
-          ret = i-1
-          return
-       else
-          z = z**2 + c
-       end if
-    end do
-    ret = max_iter
-  end function point_in_mandelbrot_set
-
-  pure function point_in_julia_set(c, max_iter) result(ret)
-    complex, intent(in) :: c
-    integer, intent(in) :: max_iter
-    integer :: ret
-    integer :: i
-    complex :: z
-
-    z = c
-    do i = 1, max_iter
-       if ( real(z * conjg(z)) .gt. 4.0 ) then
-          ret = i-1
-          return
-       else
-          z = z**2 + cmplx(0.285, 0.01)
-       end if
-    end do
-    ret = max_iter
-  end function point_in_julia_set
-
   subroutine compute_slice(in_set_fn, image_slice, slice, nslice, &
        min, max, grid_size_x, grid_size_y, max_iter)
-    procedure(fn) :: in_set_fn
+    procedure(fn), pointer :: in_set_fn
     integer, allocatable, dimension(:,:), intent(out) :: image_slice
     integer, intent(in) :: slice, nslice
     complex, intent(in) :: min, max
@@ -196,7 +203,7 @@ contains
   subroutine compute_set(in_set_fn, image, min, max, grid_size_x, &
        grid_size_y, max_iter)
     integer, dimension(:,:), intent(inout) :: image
-    procedure(fn) :: in_set_fn
+    procedure(fn), pointer :: in_set_fn
     complex, intent(in) :: min, max
     integer, intent(in) :: grid_size_x, grid_size_y
     integer, intent(in) :: max_iter
