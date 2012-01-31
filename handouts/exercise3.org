@@ -158,7 +158,9 @@ then point the function pointer at the function =a=.  In line [[(fp-call)]]
 we call a subroutine with this function pointer, in the next line we
 call the function directly.  Note that compiler support for this
 feature is patchy.  Things will improve in the coming years as Fortran
-2003 support becomes more widespread.
+2003 support becomes more widespread.  On Ness, we need to use version
+11 of the PGI compiler.  Before compiling your code, you need to do
+: module switch pgi-10 pgi-11
 
 * The Julia set
 
