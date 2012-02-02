@@ -26,8 +26,10 @@
     - [X] Write instructions
     - [X] Do dry run (does it make sense?)
 
-** TODO Practical 2a (Serial domain decomposition)
+** DONE Practical 2a (Serial domain decomposition)
    DEADLINE: <2012-01-24 Tue>
+   :LOGBOOK:
+   :END:
 *** DONE C
     :LOGBOOK:
     :END:
@@ -42,12 +44,16 @@
     - [X] Template
     - [X] Test
 
-*** TODO Handout
+*** DONE Handout
+    :LOGBOOK:
+    :END:
     - [X] Write instructions
-    - [ ] Do dry run (does it make sense?)
+    - [X] Do dry run (does it make sense?)
 
-** TODO Practical 2b (Extend serial domain decomposition to parallel MPI)
+** DONE Practical 2b (Extend serial domain decomposition to parallel MPI)
    DEADLINE: <2012-01-24 Tue>
+   :LOGBOOK:
+   :END:
 *** DONE C
     :LOGBOOK:
     :END:
@@ -62,12 +68,16 @@
     - [X] Template
     - [X] Test
 
-*** TODO Handout
+*** DONE Handout
+    :LOGBOOK:
+    :END:
     - [X] Write instructions
-    - [ ] Do dry run (does it make sense?)
+    - [X] Do dry run (does it make sense?)
 
-** TODO Practical 3 (Generalise practical 2b to add function pointers)
+** DONE Practical 3 (Generalise practical 2b to add function pointers)
    DEADLINE: <2012-01-31 Tue>
+   :LOGBOOK:
+   :END:
    The idea here is that most of the scaffolding code is the same
    whether you want to compute, say, the Mandelbrot of Julia sets.
    The only different thing is the function that returns whether a
@@ -86,30 +96,40 @@
     - [X] Template
     - [X] Test
 
-*** TODO Handout
+*** DONE Handout
+    :LOGBOOK:
+    :END:
     - [X] Write instructions
-    - [ ] Do dry run (does it make sense?)
+    - [X] Do dry run (does it make sense?)
 
-** TODO Practical 4 (Parallel task farm)
+** DONE Practical 4 (Parallel task farm)
    DEADLINE: <2012-02-07 Tue>
+   :LOGBOOK:
+   :END:
    Write a task-farm framework and apply it to Mandelbrot
 
    In this case, the program should deal with a number of tasks
    greater than the number of processors and the master should pass
    these out on demand from workers.
-*** TODO C
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE C
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-*** TODO Fortran
-    - [ ] Solution
-    - [ ] Template
-    - [ ] Test
+*** DONE Fortran
+    :LOGBOOK:
+    :END:
+    - [X] Solution
+    - [X] Template
+    - [X] Test
 
-*** TODO Handout
-    - [ ] Write instructions
-    - [ ] Do dry run (does it make sense?)
+*** DONE Handout
+    :LOGBOOK:
+    :END:
+    - [X] Write instructions
+    - [X] Do dry run (does it make sense?)
 
 ** TODO Practical 5 (Fork/Join)
    DEADLINE: <2012-02-14 Tue>
