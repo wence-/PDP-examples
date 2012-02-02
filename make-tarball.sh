@@ -1,22 +1,44 @@
 #!/bin/sh
+function usage {
+    echo "Usage: $0 [-s] <exercise>"
+    echo "  Build tarball for specified exercise, defaults to template code"
+    echo "  -s  Tar up solution code rather than template code"
+    exit 1
+}
+
+if [[ $# != 1 && $# != 2 ]]; then
+    usage
+fi
 
 SRC_DIR=exercises
 HANDOUTS_DIR=handouts
 
-EXERCISE=$1
-
-if [[ $EXERCISE == "" ]]; then
-    echo "You need to tell me which exercise to tar up (exercise1-5)"
-    exit 1
+if [[ $# == 2 ]]; then
+    if [[ $1 != "-s" ]]; then
+        echo "Unrecognised argument '$1'"
+        usage
+    else
+        CODEDIR=solution
+        DOSOLUTION=1
+        EXERCISE=$2
+    fi
+else
+    CODEDIR=template
+    DOSOLUTION=0
+    EXERCISE=$1
 fi
 
 # Find PDF handout for specified exercise
 HANDOUT=$HANDOUTS_DIR/$EXERCISE.pdf
 
-TARBALL=$EXERCISE.tar
-if [ ! -f $HANDOUT ]; then
-    echo "Unable to find handout PDF for $EXERCISE, have you written it?"
-    exit 1
+if [[ $DOSOLUTION == 1 ]]; then
+    TARBALL=$EXERCISE-solution.tar
+else
+    TARBALL=$EXERCISE.tar
+    if [ ! -f $HANDOUT ]; then
+        echo "Unable to find handout PDF for $EXERCISE, have you written it?"
+        exit 1
+    fi
 fi
 
 # Guard against overwriting existing tarball
@@ -44,14 +66,16 @@ TMPDIR=`mktemp -d`
 TARDIR=$TMPDIR/mandelbrot
 mkdir -p $TARDIR
 
-cp $HANDOUT $TARDIR
+if [[ $DOSOLUTION == 0 ]]; then
+    cp $HANDOUT $TARDIR
+fi
 
 mkdir $TARDIR/C
 mkdir $TARDIR/F
 
 # Clean up executables and output files (we don't want them)
-(cd $SRC_DIR/C/$EXERCISE/template; make clean 2>/dev/null; rm -f output.ppm)>/dev/null
-(cd $SRC_DIR/F/$EXERCISE/template; make clean 2>/dev/null; rm -f output.ppm)>/dev/null
+(cd $SRC_DIR/C/$EXERCISE/$CODEDIR; make clean 2>/dev/null; rm -f output.ppm)>/dev/null
+(cd $SRC_DIR/F/$EXERCISE/$CODEDIR; make clean 2>/dev/null; rm -f output.ppm)>/dev/null
 
 cp -r $SRC_DIR/C/utils $TARDIR/C/
 
@@ -61,8 +85,8 @@ mkdir -p $TARDIR/C/$EXERCISE
 mkdir -p $TARDIR/F/$EXERCISE
 
 cp $SRC_DIR/config.mak $TARDIR/
-cp -r $SRC_DIR/C/$EXERCISE/template $TARDIR/C/$EXERCISE
-cp -r $SRC_DIR/F/$EXERCISE/template $TARDIR/F/$EXERCISE
+cp -r $SRC_DIR/C/$EXERCISE/$CODEDIR $TARDIR/C/$EXERCISE
+cp -r $SRC_DIR/F/$EXERCISE/$CODEDIR $TARDIR/F/$EXERCISE
 
 
 # Build tarball
