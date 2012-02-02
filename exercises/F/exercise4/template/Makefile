@@ -25,7 +25,7 @@ $(EXE):	$(SRC) utils
 
 
 clean: clean-utils
-	rm -f $(EXE) *~ $(OBJ) $(EXE) core
+	rm -f $(EXE) *~ $(OBJ) $(EXE) core *.mod
 
 clean-utils:
 	$(MAKE) -C $(LIBDIR) clean
