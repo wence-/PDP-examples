@@ -1,0 +1,12 @@
+#ifndef _PARAMETERS_H
+#define _PARAMETERS_H
+
+#define NUM_CELLS 16
+#define NUM_FROGS 34
+
+#define CONTROL_TAG 0
+#define FROG_TAG 1
+#define FROG_REDUCTION 101
+enum { FROG_ARRIVE, YEAR_END, SIMULATION_END };
+
+#endif
